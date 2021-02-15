@@ -12,9 +12,9 @@ import matplotlib.pyplot as plt
 initialize relevant variables and CONSTANTS.
 Team size of 2
 """
-TOTAL_NR_GAMES = 1_000
+TOTAL_NR_GAMES = 100_000
 
-NUM_TEAMS = 5
+NUM_TEAMS = 1
 num_snakes = NUM_TEAMS * 2
 
 x_size, y_size = 75, 75
@@ -26,27 +26,26 @@ env.n_foods = num_snakes
 
 agent_list = []
 agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))
+"""agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))
 agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))
 agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))
-agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))
-agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))
+agent_list.append(sample_ai.player_x(x_size=x_size, y_size=y_size))"""
 
 
 def preprocess(obs):
     obs = cv2.cvtColor(obs, cv2.COLOR_BGR2GRAY)
     obs = cv2.resize(obs, (x_size, y_size), interpolation = cv2.INTER_AREA)
-    #print(np.unique(obs))
     obs = (obs-np.min(obs)) / (np.max(obs)-np.min(obs))
-    #plt.imshow(obs)
-    #plt.show()
     return obs
-
-
 k = 0
+trained = False
 for game_nr in range(TOTAL_NR_GAMES):
     done = False
     obs = env.reset()
     obs = preprocess(obs)
+    print(k)
+    k = 0
+
 
     for agent in agent_list:
         agent.reset(train=True, test_obs=obs)
@@ -54,10 +53,10 @@ for game_nr in range(TOTAL_NR_GAMES):
     while not done:
         action_list = np.zeros((num_snakes,))
 
-        for x, agent in enumerate(agent_list):
+        for x, agent in enumerate(range(len(agent_list))):
             p_1 = x*2
             p_2 = x*2 + 1
-            action_list[[p_1,p_2]] = agent.predict(obs=obs,
+            action_list[[p_1,p_2]] = agent_list[x].predict(obs=obs,
                                                    player_nr=[p_1,p_2],
                                                    train=True)
 
@@ -65,9 +64,12 @@ for game_nr in range(TOTAL_NR_GAMES):
         obs = preprocess(obs)
         #print(obs)
         k+=1
-        print(k)
+        if not (k%20):
+            print(f"{k}", end='\r')
         #print(reward)
         #env.render()
+        if k > 2500:
+            env.render()
 
     for agent in agent_list:
 
