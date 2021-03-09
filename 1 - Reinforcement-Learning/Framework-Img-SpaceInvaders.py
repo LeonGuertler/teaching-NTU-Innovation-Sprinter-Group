@@ -31,7 +31,7 @@ score_list = []
 def preprocess(obs):
     """ Basic pre-process to grayscale and re-shape for (84,84,1) or (84,84) """
     obs = cv2.cvtColor(obs, cv2.COLOR_BGR2GRAY) # grayscale
-    obs = cv2.resize(obs, (84,84)) # resize
+    obs = cv2.resize(obs, (84,84))/255.0 # resize
     return obs[...,np.newaxis] # necessary for Conv2D Layers
 
 
@@ -47,7 +47,7 @@ for game_nr in range(TOTAL_GAMES):
     while not done:
         obs = preprocess(obs)
 
-        if np.random.uniform() < epsilon: # basic epsilon-decreasing strategy
+        if np.random.uniform() < epsilon: # basic epsilon-decreasing/-greedy strategy
             action = env.action_space.sample()
         else:
             # this is where your action should be executed

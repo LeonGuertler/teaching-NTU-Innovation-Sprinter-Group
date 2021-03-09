@@ -108,6 +108,8 @@ for epoch in range(EPOCHS):
         fittest_n_genes=#check the CartPole code if you are stuck
         )
 
+    model.save("myAwesomeModelLah.model")
+
 
 
 

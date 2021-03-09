@@ -18,7 +18,7 @@ for _ in range(3):
         action = env.action_space.sample()
         _, _, done, _ = env.step(action)
         env.render()
-        time.sleep(.02)
+        time.sleep(.01)
 
 input("Test the individual actions....(press Enter)")
 # test the individual actions
@@ -29,7 +29,7 @@ for action in range(num_labels):
     while not done:
         _,_,done,_ = env.step(action)
         env.render()
-        time.sleep(.025)
+        time.sleep(.01)
 
 """
 Action-space:
@@ -82,3 +82,4 @@ num_labels = env.action_space.n
 print(env.observation_space.sample())
 print(f"Observation shape:\t{n}")
 print(f"Action space:\t\t{num_labels}")
+env.close()
