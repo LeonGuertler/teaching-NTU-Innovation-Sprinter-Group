@@ -2,7 +2,7 @@
 import gym, time, cv2
 import numpy as np
 
-env = gym.make("SpaceInvaders-ram-v0")
+env = gym.make("SpaceInvaders-v0")
 n = np.shape(env.observation_space.sample())
 num_labels = env.action_space.n
 
