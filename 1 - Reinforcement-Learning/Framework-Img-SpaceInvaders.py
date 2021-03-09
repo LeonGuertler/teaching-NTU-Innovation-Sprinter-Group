@@ -2,6 +2,12 @@
 import gym, time, cv2
 import numpy as np
 
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, BatchNormalization
+from keras.layers import Conv2D, MaxPooling2D, Flatten
+
+
 env = gym.make("SpaceInvaders-v0")
 n = np.shape(env.observation_space.sample())
 num_labels = env.action_space.n

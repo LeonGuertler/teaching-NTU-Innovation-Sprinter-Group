@@ -21,7 +21,7 @@ clf = RandomForestClassifier()
 
 for game_nr in range(INITIAL_GAMES):
     done = score = 0 # in python 0 == False
-    observation = env.reset()
+    obs = env.reset()
 
     # initialize local game_based memory
     game_obs = []
@@ -31,11 +31,11 @@ for game_nr in range(INITIAL_GAMES):
         action = env.action_space.sample() # choose a random action
 
         # append the observation, action pair to the local memory
-        game_obs.append(observation)
+        game_obs.append(obs)
         game_action.append(action)
 
         # execute the action
-        observation, reward, done, info = env.step(action)
+        obs, reward, done, info = env.step(action)
         score += reward
 
 
