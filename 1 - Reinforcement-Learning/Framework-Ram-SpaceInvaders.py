@@ -51,14 +51,17 @@ for game_nr in range(TOTAL_GAMES):
         label = np.zeros((num_labels,))
         label[a] = score
         y_train.append(label)
-        X_train.append(label)
+        X_train.append(obs)
     """
 
     """
     For strict Epsilon-first & iterative Epsilon-first strategies:
     if score >= score_threshold:
-        X_train+=game_obs
-        y_train+=game_action
+        for obs, a in zip(game_obs, game_action):
+            label = np.zeros((num_labels,))
+            label[a] = score
+            y_train.append(label)
+            X_train.append(obs)
     """
 
     if not (game_nr%50):
