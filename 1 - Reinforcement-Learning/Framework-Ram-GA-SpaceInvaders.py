@@ -39,7 +39,7 @@ def get_action(observation):
   return np.argmax(model.predict_on_batch(observation))
 
 
-def evalute_fitness(gene):
+def evaluate_fitness(gene):
     """
     Evalute the average score achieved by the currently tested gene on a fixed
     number of attempts. The average might be useful to filter some noise.

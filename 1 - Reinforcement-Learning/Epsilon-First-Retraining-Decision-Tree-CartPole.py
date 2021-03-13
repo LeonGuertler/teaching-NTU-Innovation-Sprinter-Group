@@ -14,7 +14,7 @@ X_train = []
 y_train = []
 
 score_threshold = 30 # everything above this threshold is appended for training
-TOTAL_GAMES = 10_000 # the total nr of games played
+TOTAL_GAMES = 2_500 # the total nr of games played
 TRAIN_EVERY = 100
 nr_games_appended = 0 # keep track of nr of games appended to training
 
@@ -51,7 +51,11 @@ for game_nr in range(TOTAL_GAMES):
         y_train+=game_action
 
     if not (game_nr%10) or trained: # print every n games
-        print(f"{game_nr} / {TOTAL_GAMES}\tscore: {score}\tthreshold: {score_threshold:.2f}\tBatch avg. {np.mean(score_list):.2f}\tnr games appended: {nr_games_appended}", end="\r")
+        print(f"{game_nr} / {TOTAL_GAMES}"+\
+              f"\tscore: {score}"+\
+              f"\tthreshold: {score_threshold:.2f}"+\
+              f"\tBatch avg. {np.mean(score_list):.2f}"+\
+              f"\tnr games appended: {nr_games_appended}", end="\r")
 
     if not ((game_nr+1)%TRAIN_EVERY):
         print(f"\nTraining:\tmax score: {np.max(score_list)}\tmean score: {np.mean(score_list):.2f}")

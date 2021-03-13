@@ -35,6 +35,7 @@ for game_nr in range(TOTAL_GAMES):
     game_action = []
 
     while not done:
+        obs = obs/255.0
         if np.random.uniform() < epsilon: # basic epsilon-decreasing strategy
             action = env.action_space.sample()
         else:
@@ -66,8 +67,8 @@ for game_nr in range(TOTAL_GAMES):
 
     if not (game_nr%50):
         print(f"{game_nr} / {TOTAL_GAMES}"+\
-              f"Most recent score: {score}"+\
-              f"Inter-training score-avg: {np.mean(score_list)}")
+              f"\tMost recent score: {score}"+\
+              f"\tInter-training score-avg: {np.mean(score_list)}")
 
 
     """

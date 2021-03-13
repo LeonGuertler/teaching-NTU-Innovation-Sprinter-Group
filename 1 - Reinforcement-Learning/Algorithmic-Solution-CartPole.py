@@ -1,7 +1,7 @@
 import gym, time
 
 # create the environemt
-env = gym.make("CartPole-v1")
+env = gym.make("CartPole-v0")
 
 for game_nr in range(15):
     # initialize and reset game relevant variables
